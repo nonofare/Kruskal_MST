@@ -11,11 +11,11 @@ namespace GraphLib {
 
         ~UnionFind();
 
-        int SimpleFind(int x);
+        int Find(int x);
 
         int CompressFind(int x);
 
-        void SimpleUnite(int x, int y);
+        void Unite(int x, int y);
 
         void RankUnite(int x, int y);
     };

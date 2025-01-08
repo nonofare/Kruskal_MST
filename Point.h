@@ -13,9 +13,9 @@ namespace GraphLib {
         Point *first, *second;
         double weight;
 
-        Pair(Point *first, Point *second, const double weight) : first(first), second(second), weight(weight) {
+        Pair(Point *first, Point *second, const double weight = 1) : first(first), second(second), weight(weight) {
         }
     };
 }
 
-#endif //POINT_H
+#endif

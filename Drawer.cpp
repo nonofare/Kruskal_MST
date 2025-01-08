@@ -1,7 +1,7 @@
 #include "Graph.h"
 
 namespace GraphLib {
-    void Graph::GraphDrawer() const {
+    void Graph::Draw() const {
         Py_Initialize();
 
         PyObject *x_list = PyList_New(static_cast<int>(points.size()));
@@ -68,7 +68,7 @@ plt.show()
         Py_Finalize();
     }
 
-    void Graph::MSTDrawer(const std::vector<Pair> &mst) const {
+    void Graph::DrawWithMST(const std::vector<Pair> &mst) const {
         Py_Initialize();
 
         PyObject *x_list = PyList_New(static_cast<int>(points.size()));

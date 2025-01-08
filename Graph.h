@@ -6,7 +6,7 @@
 #include <vector>
 #include <fstream>
 #include <Python.h>
-#include <unordered_map>
+#include <unordered_map> // temp
 
 namespace GraphLib {
     class Graph {
@@ -18,23 +18,21 @@ namespace GraphLib {
 
         ~Graph();
 
+        void LoadFromFile(const std::string &file_path);
+
         void AddPoint(double x, double y);
 
         void MakePair(Point *first, Point *second, double weight);
 
-        void Clear();
-
-        void LoadFromFile(const std::string &file_path);
-
         std::vector<Pair> GetMST() const;
+
+        void Clear();
 
         std::string ToString(size_t points_limit = 0, size_t connections_limit = 0) const;
 
-        std::string MSTToString(const std::vector<Pair> &mst, size_t limit = 0) const;
+        void Draw() const;
 
-        void GraphDrawer() const;
-
-        void MSTDrawer(const std::vector<Pair> &mst) const;
+        void DrawWithMST(const std::vector<Pair> &mst) const;
     };
 }
 

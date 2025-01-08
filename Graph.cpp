@@ -1,26 +1,11 @@
 #include "Graph.h"
+#include <algorithm> // temp
 
 namespace GraphLib {
     Graph::Graph() = default;
 
     Graph::~Graph() {
         Graph::Clear();
-    }
-
-    void Graph::AddPoint(const double x, const double y) {
-        points.push_back(new Point(x, y));
-    }
-
-    void Graph::MakePair(Point *first, Point *second, const double weight) {
-        edges.emplace_back(first, second, weight);
-    }
-
-    void Graph::Clear() {
-        for (size_t i = 0; i < points.size(); i++) {
-            delete points[i];
-        }
-        points.clear();
-        edges.clear();
     }
 
     void Graph::LoadFromFile(const std::string &file_path) {
@@ -31,7 +16,7 @@ namespace GraphLib {
 
         Clear();
 
-        size_t points_size, edges_size;
+        size_t points_size{}, edges_size{};
 
         file >> points_size;
         for (size_t i = 0; i < points_size; i++) {
@@ -49,6 +34,14 @@ namespace GraphLib {
         }
 
         file.close();
+    }
+
+    void Graph::AddPoint(const double x, const double y) {
+        points.push_back(new Point(x, y));
+    }
+
+    void Graph::MakePair(Point *first, Point *second, const double weight) {
+        edges.emplace_back(first, second, weight);
     }
 
     std::vector<Pair> Graph::GetMST() const {
@@ -83,9 +76,20 @@ namespace GraphLib {
         return mst;
     }
 
+    void Graph::Clear() {
+        for (size_t i = 0; i < points.size(); i++) {
+            delete points[i];
+        }
+        points.clear();
+        edges.clear();
+    }
+
     std::string Graph::ToString(size_t points_limit, size_t edges_limit) const {
         if (points_limit <= 0 || points_limit > points.size()) {
             points_limit = points.size();
+        }
+        if (edges_limit <= 0 || edges_limit > edges.size()) {
+            edges_limit = edges.size();
         }
 
         std::string text = ">>> Graph <<<\n";
@@ -101,10 +105,6 @@ namespace GraphLib {
 
         if (points_limit < points.size()) {
             text += "[...]\n";
-        }
-
-        if (edges_limit <= 0 || edges_limit > edges.size()) {
-            edges_limit = edges.size();
         }
 
         text += "Edges: " + std::to_string(edges.size()) + "\n";
@@ -123,36 +123,6 @@ namespace GraphLib {
         }
 
         if (edges_limit < edges.size()) {
-            text += "[...]\n";
-        }
-
-        return text;
-    }
-
-    std::string Graph::MSTToString(const std::vector<Pair> &mst, size_t limit) const {
-        if (limit <= 0 || limit > mst.size()) {
-            limit = mst.size();
-        }
-
-        double weight = 0.0;
-        std::string text = ">>> MST <<<\n";
-        for (size_t i = 0; i < limit; i++) {
-            weight += mst[i].weight;
-
-            text += "(";
-            text += std::to_string(mst[i].first->x);
-            text += ", ";
-            text += std::to_string(mst[i].first->y);
-            text += ") -> ";
-            text += "(";
-            text += std::to_string(mst[i].second->x);
-            text += ", ";
-            text += std::to_string(mst[i].second->y);
-            text += ") -> \n";
-        }
-        text += "Full path weight: " + std::to_string(weight) + "\n";
-
-        if (limit < mst.size()) {
             text += "[...]\n";
         }
 
