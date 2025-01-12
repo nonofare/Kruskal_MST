@@ -14,7 +14,7 @@ namespace GraphLib {
         delete[] rank;
     }
 
-    int UnionFind::Find(int node) {
+    int UnionFind::Find(int node) const {
         while (node != parent[node]) {
             node = parent[node];
         }

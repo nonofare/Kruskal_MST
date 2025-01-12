@@ -4,8 +4,9 @@
 namespace GraphLib {
     struct Point {
         double x, y;
+        unsigned long long index;
 
-        Point(const double x, const double y) : x(x), y(y) {
+        Point(const double x, const double y, const unsigned long long index = 0) : x(x), y(y), index(index) {
         }
     };
 
@@ -13,7 +14,7 @@ namespace GraphLib {
         Point *first, *second;
         double weight;
 
-        Pair(Point *first, Point *second, const double weight = 1) : first(first), second(second), weight(weight) {
+        Pair(Point *first, Point *second, const double weight = 1.0) : first(first), second(second), weight(weight) {
         }
     };
 }

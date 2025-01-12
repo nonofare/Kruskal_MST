@@ -5,34 +5,35 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <chrono>
 #include <Python.h>
-#include <unordered_map> // temp
 
 namespace GraphLib {
     class Graph {
         std::vector<Point *> points;
         std::vector<Pair> edges;
 
-    public:
-        Graph();
-
-        ~Graph();
-
+    protected:
         void LoadFromFile(const std::string &file_path);
 
-        void AddPoint(double x, double y);
+        void AddPoint(double x, double y, size_t index);
 
         void MakePair(Point *first, Point *second, double weight);
 
-        std::vector<Pair> GetMST() const;
+        std::vector<Pair> GetSortedEdges() const;
 
-        void Clear();
+    public:
+        explicit Graph(const std::string &file_path);
 
-        std::string ToString(size_t points_limit = 0, size_t connections_limit = 0) const;
+        ~Graph();
 
-        void Draw() const;
+        std::vector<Pair> GetMST(int &edges_size, double &weight, double &sort_time, double &loop_time,
+                                 int &find_calls) const;
 
-        void DrawWithMST(const std::vector<Pair> &mst) const;
+        std::string ToString(bool with_mst = false, size_t points_limit = 0, size_t connections_limit = 0,
+                             size_t mst_limit = 0) const;
+
+        void Draw(bool with_mst = false) const;
     };
 }
 

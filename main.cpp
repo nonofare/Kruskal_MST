@@ -2,25 +2,31 @@
 #include "Graph.h"
 
 int main(int argc, char *argv[]) {
-    if (argc != 2) {
-        std::cerr << "Usage: " << argv[0] << " <filename>" << std::endl;
-        return 1;
+    if (argc != 4) {
+        std::cerr << "Usage: " << argv[0] << " <file1> <file2> <file3>" << std::endl;
+        return EXIT_FAILURE;
     }
 
-    auto graph = new GraphLib::Graph();
+    GraphLib::Graph *g1, *g2, *g3;
     try {
-        graph->LoadFromFile(argv[1]);
+        g1 = new GraphLib::Graph(argv[1]);
+        g2 = new GraphLib::Graph(argv[2]);
+        g3 = new GraphLib::Graph(argv[3]);
     } catch (const std::exception &e) {
         std::cout << e.what() << std::endl;
-        delete graph;
-        return 1;
+        return EXIT_FAILURE;
     }
 
-    const std::vector<GraphLib::Pair> mst = graph->GetMST();
+    std::cout << g1->ToString(true, 10, 10, 10);
+    std::cout << g2->ToString(true, 10, 10, 10);
+    std::cout << g3->ToString(true, 10, 10, 10);
 
-    std::cout << graph->ToString(10, 10);
-    graph->DrawWithMST(mst);
+    //g1->Draw(true);
+    g2->Draw(true);
+    //g3->Draw(true);
 
-    delete graph;
-    return 0;
+    delete g1;
+    delete g2;
+    delete g3;
+    return EXIT_SUCCESS;
 }
