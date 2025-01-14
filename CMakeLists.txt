@@ -12,6 +12,7 @@ add_executable(Kruskal main.cpp
         UnionFind.cpp
         UnionFind.h
         Drawer.cpp
+        DA.h
 )
 
 target_include_directories(Kruskal PRIVATE ${Python3_INCLUDE_DIRS})

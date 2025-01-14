@@ -6,10 +6,10 @@ namespace GraphLib {
         PyObject *main_module = PyImport_AddModule("__main__");
         PyObject *global_dict = PyModule_GetDict(main_module);
 
-        PyObject *x_list = PyList_New(static_cast<int>(points.size()));
-        PyObject *y_list = PyList_New(static_cast<int>(points.size()));
-        PyObject *index_list = PyList_New(static_cast<int>(points.size()));
-        for (size_t i = 0; i < points.size(); i++) {
+        PyObject *x_list = PyList_New(static_cast<int>(points.Size()));
+        PyObject *y_list = PyList_New(static_cast<int>(points.Size()));
+        PyObject *index_list = PyList_New(static_cast<int>(points.Size()));
+        for (size_t i = 0; i < points.Size(); i++) {
             PyList_SetItem(x_list, static_cast<long>(i), PyFloat_FromDouble(points[i]->x));
             PyList_SetItem(y_list, static_cast<long>(i), PyFloat_FromDouble(points[i]->y));
             PyList_SetItem(index_list, static_cast<long>(i), PyLong_FromUnsignedLong(points[i]->index));
@@ -18,17 +18,17 @@ namespace GraphLib {
         PyDict_SetItemString(global_dict, "y_cords", y_list);
         PyDict_SetItemString(global_dict, "indexes", index_list);
 
-        PyObject *start_x_list = PyList_New(static_cast<int>(edges.size()));
-        PyObject *start_y_list = PyList_New(static_cast<int>(edges.size()));
-        PyObject *end_x_list = PyList_New(static_cast<int>(edges.size()));
-        PyObject *end_y_list = PyList_New(static_cast<int>(edges.size()));
-        PyObject *weights_list = PyList_New(static_cast<int>(edges.size()));
-        for (size_t i = 0; i < edges.size(); i++) {
-            PyList_SetItem(start_x_list, static_cast<long>(i), PyFloat_FromDouble(edges[i].first->x));
-            PyList_SetItem(start_y_list, static_cast<long>(i), PyFloat_FromDouble(edges[i].first->y));
-            PyList_SetItem(end_x_list, static_cast<long>(i), PyFloat_FromDouble(edges[i].second->x));
-            PyList_SetItem(end_y_list, static_cast<long>(i), PyFloat_FromDouble(edges[i].second->y));
-            PyList_SetItem(weights_list, static_cast<long>(i), PyFloat_FromDouble(edges[i].weight));
+        PyObject *start_x_list = PyList_New(static_cast<int>(edges.Size()));
+        PyObject *start_y_list = PyList_New(static_cast<int>(edges.Size()));
+        PyObject *end_x_list = PyList_New(static_cast<int>(edges.Size()));
+        PyObject *end_y_list = PyList_New(static_cast<int>(edges.Size()));
+        PyObject *weights_list = PyList_New(static_cast<int>(edges.Size()));
+        for (size_t i = 0; i < edges.Size(); i++) {
+            PyList_SetItem(start_x_list, static_cast<long>(i), PyFloat_FromDouble(edges[i]->first->x));
+            PyList_SetItem(start_y_list, static_cast<long>(i), PyFloat_FromDouble(edges[i]->first->y));
+            PyList_SetItem(end_x_list, static_cast<long>(i), PyFloat_FromDouble(edges[i]->second->x));
+            PyList_SetItem(end_y_list, static_cast<long>(i), PyFloat_FromDouble(edges[i]->second->y));
+            PyList_SetItem(weights_list, static_cast<long>(i), PyFloat_FromDouble(edges[i]->weight));
         }
         PyDict_SetItemString(global_dict, "start_x", start_x_list);
         PyDict_SetItemString(global_dict, "start_y", start_y_list);
@@ -43,18 +43,18 @@ namespace GraphLib {
         if (with_mst) {
             int mst_edges_size{}, mst_find_calls{};
             double mst_weight{}, mst_sort_time{}, mst_loop_time{};
-            const std::vector<Pair> mst = this->GetMST(mst_edges_size, mst_weight, mst_sort_time, mst_loop_time,
-                                                       mst_find_calls);
+            const DA::DynArr<Pair *> mst = this->GetMST(mst_edges_size, mst_weight, mst_sort_time, mst_loop_time,
+                                                        mst_find_calls);
 
-            mst_start_x_list = PyList_New(static_cast<int>(mst.size()));
-            mst_start_y_list = PyList_New(static_cast<int>(mst.size()));
-            mst_end_x_list = PyList_New(static_cast<int>(mst.size()));
-            mst_end_y_list = PyList_New(static_cast<int>(mst.size()));
-            for (size_t i = 0; i < mst.size(); i++) {
-                PyList_SetItem(mst_start_x_list, static_cast<long>(i), PyFloat_FromDouble(mst[i].first->x));
-                PyList_SetItem(mst_start_y_list, static_cast<long>(i), PyFloat_FromDouble(mst[i].first->y));
-                PyList_SetItem(mst_end_x_list, static_cast<long>(i), PyFloat_FromDouble(mst[i].second->x));
-                PyList_SetItem(mst_end_y_list, static_cast<long>(i), PyFloat_FromDouble(mst[i].second->y));
+            mst_start_x_list = PyList_New(static_cast<int>(mst.Size()));
+            mst_start_y_list = PyList_New(static_cast<int>(mst.Size()));
+            mst_end_x_list = PyList_New(static_cast<int>(mst.Size()));
+            mst_end_y_list = PyList_New(static_cast<int>(mst.Size()));
+            for (size_t i = 0; i < mst.Size(); i++) {
+                PyList_SetItem(mst_start_x_list, static_cast<long>(i), PyFloat_FromDouble(mst[i]->first->x));
+                PyList_SetItem(mst_start_y_list, static_cast<long>(i), PyFloat_FromDouble(mst[i]->first->y));
+                PyList_SetItem(mst_end_x_list, static_cast<long>(i), PyFloat_FromDouble(mst[i]->second->x));
+                PyList_SetItem(mst_end_y_list, static_cast<long>(i), PyFloat_FromDouble(mst[i]->second->y));
             }
             PyDict_SetItemString(global_dict, "mst_start_x", mst_start_x_list);
             PyDict_SetItemString(global_dict, "mst_start_y", mst_start_y_list);

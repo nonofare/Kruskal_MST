@@ -1,17 +1,17 @@
 #ifndef GRAPH_H
 #define GRAPH_H
+#include "DA.h"
 #include "Point.h"
 #include "UnionFind.h"
 #include <string>
-#include <vector>
 #include <fstream>
 #include <chrono>
 #include <Python.h>
 
 namespace GraphLib {
     class Graph {
-        std::vector<Point *> points;
-        std::vector<Pair> edges;
+        DA::DynArr<Point *> points;
+        DA::DynArr<Pair *> edges;
 
     protected:
         void LoadFromFile(const std::string &file_path);
@@ -20,15 +20,15 @@ namespace GraphLib {
 
         void MakePair(Point *first, Point *second, double weight);
 
-        std::vector<Pair> GetSortedEdges() const;
+        DA::DynArr<Pair *> GetSortedEdges() const;
 
     public:
         explicit Graph(const std::string &file_path);
 
         ~Graph();
 
-        std::vector<Pair> GetMST(int &edges_size, double &weight, double &sort_time, double &loop_time,
-                                 int &find_calls) const;
+        DA::DynArr<Pair *> GetMST(int &edges_size, double &weight, double &sort_time, double &loop_time,
+                                  int &find_calls) const;
 
         std::string ToString(bool with_mst = false, size_t points_limit = 0, size_t connections_limit = 0,
                              size_t mst_limit = 0) const;
