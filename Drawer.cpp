@@ -41,9 +41,10 @@ namespace GraphLib {
         PyObject *mst_end_x_list = nullptr;
         PyObject *mst_end_y_list = nullptr;
         if (with_mst) {
-            int mst_edges_size{}, mst_find_calls{};
-            double mst_weight{}, mst_sort_time{}, mst_loop_time{};
-            const DA::DynArr<Pair *> mst = this->GetMST(mst_edges_size, mst_weight, mst_sort_time, mst_loop_time,
+            int mst_find_calls{};
+            double mst_sort_time{}, mst_loop_time{};
+            const DA::DynArr<Pair *> mst = this->GetMST(true, true,
+                                                        mst_sort_time, mst_loop_time,
                                                         mst_find_calls);
 
             mst_start_x_list = PyList_New(static_cast<int>(mst.Size()));

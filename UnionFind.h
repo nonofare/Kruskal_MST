@@ -6,18 +6,22 @@ namespace GraphLib {
         int *parent;
         int *rank;
 
+        int find_calls;
+
     public:
         explicit UnionFind(int n);
 
         ~UnionFind();
 
-        int Find(int node) const;
+        int GetFindCalls() const;
+
+        int Find(int node);
 
         int CompressFind(int node);
 
-        void Unite(int node_x, int node_y);
+        void Unite(int root_x, int root_y);
 
-        void RankUnite(int node_x, int node_y);
+        void RankUnite(int root_x, int root_y);
     };
 }
 

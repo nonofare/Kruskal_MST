@@ -17,12 +17,12 @@ int main(int argc, char *argv[]) {
         return EXIT_FAILURE;
     }
 
-    std::cout << g1->ToString(true, 10, 10, 10);
-    std::cout << g2->ToString(true, 10, 10, 10);
-    std::cout << g3->ToString(true, 10, 10, 10);
+    std::cout << g1->ToString(true, 4, 4, 8) << std::endl;
+    std::cout << g2->ToString(true, 4, 4, 8) << std::endl;
+    std::cout << g3->ToString(true, 4, 4, 8) << std::endl;
 
-    //g1->Draw(true);
-    g2->Draw(true);
+    g1->Draw(true);
+    //g2->Draw(true);
     //g3->Draw(true);
 
     delete g1;

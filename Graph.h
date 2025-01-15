@@ -27,11 +27,12 @@ namespace GraphLib {
 
         ~Graph();
 
-        DA::DynArr<Pair *> GetMST(int &edges_size, double &weight, double &sort_time, double &loop_time,
+        DA::DynArr<Pair *> GetMST(bool RankUnite, bool PathCompression,
+                                  double &sort_time, double &loop_time,
                                   int &find_calls) const;
 
-        std::string ToString(bool with_mst = false, size_t points_limit = 0, size_t connections_limit = 0,
-                             size_t mst_limit = 0) const;
+        std::string ToString(bool with_mst = false, size_t points_limit = 0,
+                             size_t connections_limit = 0, size_t mst_limit = 0) const;
 
         void Draw(bool with_mst = false) const;
     };

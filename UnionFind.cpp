@@ -1,7 +1,7 @@
 #include "UnionFind.h"
 
 namespace GraphLib {
-    UnionFind::UnionFind(const int n) {
+    UnionFind::UnionFind(const int n) : find_calls(0) {
         parent = new int[n];
         rank = new int[n]{};
         for (int i = 0; i < n; i++) {
@@ -14,42 +14,41 @@ namespace GraphLib {
         delete[] rank;
     }
 
-    int UnionFind::Find(int node) const {
-        while (node != parent[node]) {
-            node = parent[node];
+    int UnionFind::GetFindCalls() const {
+        return find_calls;
+    }
+
+    int UnionFind::Find(int node) {
+        find_calls++;
+        if (node == parent[node]) {
+            return node;
         }
-        return node;
+        return Find(parent[node]);
     }
 
     int UnionFind::CompressFind(const int node) {
+        find_calls++;
         if (node != parent[node]) {
-            parent[node] = CompressFind(parent[node]);
+            int root = CompressFind(parent[node]);
+            if (root != parent[node]) {
+                parent[node] = root;
+            }
         }
         return parent[node];
     }
 
-    void UnionFind::Unite(const int node_x, const int node_y) {
-        int root_x = CompressFind(node_x);
-        int root_y = CompressFind(node_y);
-
-        if (root_x != root_y) {
-            parent[root_x] = root_y;
-        }
+    void UnionFind::Unite(const int root_x, const int root_y) {
+        parent[root_x] = root_y;
     }
 
-    void UnionFind::RankUnite(const int node_x, const int node_y) {
-        int root_x = CompressFind(node_x);
-        int root_y = CompressFind(node_y);
-
-        if (root_x != root_y) {
-            if (rank[root_x] < rank[root_y]) {
-                parent[root_x] = root_y;
-            } else if (rank[root_x] > rank[root_y]) {
-                parent[root_y] = root_x;
-            } else {
-                parent[root_y] = root_x;
-                rank[root_x]++;
-            }
+    void UnionFind::RankUnite(const int root_x, const int root_y) {
+        if (rank[root_x] < rank[root_y]) {
+            parent[root_x] = root_y;
+        } else if (rank[root_x] > rank[root_y]) {
+            parent[root_y] = root_x;
+        } else {
+            parent[root_y] = root_x;
+            rank[root_x]++;
         }
     }
 }
