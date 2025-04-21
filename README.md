@@ -53,14 +53,14 @@ int main() {
 
 1. **"g1.txt":**
 
-<div align="center">
-  <img src="./plots/plot1.png" width="500">
+<div>
+  <img src="./plots/plot1.png">
 </div>
 
 2. **"g2.txt":**
 
-<div align="center">
-  <img src="./plots/plot2.png" width="500">
+<div>
+  <img src="./plots/plot2.png">
 </div>
 
 ## Installation
