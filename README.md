@@ -49,6 +49,20 @@ int main() {
 }
 ```
 
+## Included examples
+
+1. **"g1.txt":**
+
+<div align="center">
+  <img src="./plots/plot1.png" width="500">
+</div>
+
+2. **"g2.txt":**
+
+<div align="center">
+  <img src="./plots/plot2.png" width="500">
+</div>
+
 ## Installation
 
 1. **Clone the repository:**
