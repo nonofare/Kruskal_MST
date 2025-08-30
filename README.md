@@ -25,8 +25,8 @@ graph processing techniques such as edge sorting and the Union-Find (Disjoint Se
 1. **Sort Edges:** All edges are sorted in non-decreasing order of weight.
 2. **Initialize Sets:** Each vertex is placed in its own set.
 3. **Edge Selection:** Iterate through the sorted edges, and for each edge:
-    - If it connects two different sets, add it to the MST.
-    - Merge the sets (union operation).
+   - If it connects two different sets, add it to the MST.
+   - Merge the sets (union operation).
 4. **Result:** The MST is built from the selected edges.
 
 ## Example Usage
@@ -66,11 +66,13 @@ int main() {
 ## Installation
 
 1. **Clone the repository:**
+
    ```bash
    git clone https://github.com/nonofare/Kruskal_algorithm.git
    ```
 
 2. **Navigate to the project directory:**
+
    ```bash
    cd Kruskal_algorithm
    ```
@@ -90,6 +92,7 @@ int main() {
    ```
 
 4. **Run the executable:**
+
    ```bash
    ./kruskal_mst
    ```
@@ -98,9 +101,8 @@ int main() {
 
 ## Contributing
 
-Contributions are welcome! If you spot any bugs or have ideas for enhancements, feel free to open an issue or submit a
-pull request.
+Please open an issue or submit a pull request for any improvements or bug fixes.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
+This project is licensed under the MIT License. See the LICENSE file for details.
